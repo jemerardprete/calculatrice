@@ -4,6 +4,16 @@ function Calculatrice() {
 
     const [cpt, updateCpt] = useState("");
 
+    function addbits(string) {
+        var total = 0;
+        string = string.match(/[-]*(\.\d+|\d+(\.\d+)?)/g) || [];
+
+        while (string.length) {
+            total += parseFloat(string.shift());
+        }
+        return total;
+    }
+
     return (
         <div className="main" >
             <div className="screen">
@@ -27,7 +37,7 @@ function Calculatrice() {
             <div className="operation">
                 <input className="btn-op" type="button" value="+" onClick={() => updateCpt(cpt + "+")} />
                 <input className="btn-op" type="button" value="-" onClick={() => updateCpt(cpt + "-")} />
-                <input className="btn-op" type="button" value="=" onClick={() => updateCpt(eval(cpt))} />
+                <input className="btn-op" type="button" value="=" onClick={() => updateCpt(addbits(cpt))} />
             </div>
         </div>
     )
